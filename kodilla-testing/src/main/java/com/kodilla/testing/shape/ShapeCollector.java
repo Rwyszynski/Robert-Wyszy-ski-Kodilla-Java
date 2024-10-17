@@ -2,38 +2,43 @@ package com.kodilla.testing.shape;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.kodilla.testing.shape.Shape;
 
 public class ShapeCollector {
 
-    private String name;
-    private Integer area;
     private List<Shape> listOfShapes = new ArrayList<>();
 
-    public ShapeCollector(String name, Integer area) {
-        private this.name = name;
-        private this.area = area;
-    }
+
+
 
     public void addFigure(Shape shape) {
-        Shape shape1 = new Shape(shape);
-        listOfShapes.add();
-    }
-    public void removeFigure(Shape shape) {
+        listOfShapes.add(shape);
 
     }
-    public void getFigure(int n) {
+    public boolean removeFigure(Shape shape) {
+        listOfShapes.remove(shape);
 
+        return true;
     }
-    public void showFigures() {
+    public Shape getFigure(int figureNumber) {
+        Shape shape1 = listOfShapes.get(figureNumber);
+        return shape1;
+    }
+    public List<Shape> showFigures() {
 
+        return listOfShapes;
     }
 
-    public String getName() {
-        return name;
+    public String getName(int shape) {
+        String shapeName = listOfShapes.get(shape).getShapeName();
+        return shapeName;
     }
 
-    public Integer getArea() {
-        return area;
+    public Integer getField(int shape) {
+        Integer shapeField = listOfShapes.get(shape).getField();
+        return shapeField;
+    }
+
+    public int getShapeQuantity() {
+        return listOfShapes.size();
     }
 }

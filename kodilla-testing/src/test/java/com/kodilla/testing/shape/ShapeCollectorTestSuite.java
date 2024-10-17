@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.*;
 
 @DisplayName("TDD: Shape Collector Suite")
 public class ShapeCollectorTestSuite {
@@ -99,6 +100,9 @@ public class ShapeCollectorTestSuite {
             Assertions.assertFalse(result2);
             Assertions.assertFalse(result3);
 
+            Assertions.assertEquals(0, shapeCollector.getShapeQuantity());
+
+
         }
 
         void testShowFigures() {
@@ -111,12 +115,15 @@ public class ShapeCollectorTestSuite {
             shapeCollector.addFigure(circle);
             shapeCollector.addFigure(square);
             shapeCollector.addFigure(triangle);
+            List<Shape> listList = new ArrayList<>();
+            listList.add(circle);
+            listList.add(square);
+            listList.add(triangle);
 
             //When
-            Shape getFigures = shapeCollector.showFigures(0);
-
+            List<Shape> getFigures = shapeCollector.showFigures();
             //Then
-            Assertions.assertEquals((circle, square, triangle), getFigures);
+            Assertions.assertEquals(listList, getFigures);
 
         }
 
@@ -133,9 +140,9 @@ public class ShapeCollectorTestSuite {
             shapeCollector.addFigure(triangle);
 
             //When
-            Shape getFirstFigure = shapeCollector.getName(0);
-            Shape getSecondFigure = shapeCollector.getName(1);
-            Shape getThirdFigure = shapeCollector.getName(2);
+            String getFirstFigure = shapeCollector.getName(0);
+            String getSecondFigure = shapeCollector.getName(1);
+            String getThirdFigure = shapeCollector.getName(2);
 
 
             //Then
@@ -157,9 +164,9 @@ public class ShapeCollectorTestSuite {
             shapeCollector.addFigure(triangle);
 
             //When
-            Shape getFirstFigure = shapeCollector.getName(0);
-            Shape getSecondFigure = shapeCollector.getName(1);
-            Shape getThirdFigure = shapeCollector.getName(2);
+            Integer getFirstFigure = Integer.valueOf(shapeCollector.getName(0));
+            Integer getSecondFigure = Integer.valueOf(shapeCollector.getName(1));
+            Integer getThirdFigure = Integer.valueOf(shapeCollector.getName(2));
 
 
             //Then
