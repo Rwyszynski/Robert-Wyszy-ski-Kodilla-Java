@@ -31,16 +31,18 @@ public class ShapeCollectorTestSuite {
         System.out.println("Preparing to execute test #" + testCounter);
     }
 
+    @Nested
     @DisplayName("Test for Shape")
     class TestShape {
 
+        @Test
         void testAddShape() {
             //Given
             ShapeCollector shapeCollector = new ShapeCollector();
 
-            Shape circle = new Circle();
-            Shape square = new Square();
-            Shape triangle = new Triangle();
+            Shape circle = new Circle(3);
+            Shape square = new Square(3);
+            Shape triangle = new Triangle(3,2);
 
             //When
             shapeCollector.addFigure(circle);
@@ -51,14 +53,14 @@ public class ShapeCollectorTestSuite {
             Assertions.assertEquals(3, shapeCollector.getShapeQuantity());
 
         }
-
+        @Test
         void testGetShape() {
             //Given
             ShapeCollector shapeCollector = new ShapeCollector();
 
-            Shape circle = new Circle();
-            Shape square = new Square();
-            Shape triangle = new Triangle();
+            Shape circle = new Circle(3);
+            Shape square = new Square(3);
+            Shape triangle = new Triangle(3,2);
             shapeCollector.addFigure(circle);
             shapeCollector.addFigure(square);
             shapeCollector.addFigure(triangle);
@@ -77,14 +79,14 @@ public class ShapeCollectorTestSuite {
             Assertions.assertEquals(square, getSecondFigure);
             Assertions.assertEquals(triangle, getThirdFigure);
         }
-
+        @Test
         void testRemoveShape() {
             //Given
             ShapeCollector shapeCollector = new ShapeCollector();
 
-            Shape circle = new Circle();
-            Shape square = new Square();
-            Shape triangle = new Triangle();
+            Shape circle = new Circle(3);
+            Shape square = new Square(3);
+            Shape triangle = new Triangle(3,2);
             shapeCollector.addFigure(circle);
             shapeCollector.addFigure(square);
             shapeCollector.addFigure(triangle);
@@ -104,14 +106,14 @@ public class ShapeCollectorTestSuite {
 
 
         }
-
+        @Test
         void testShowFigures() {
             //Given
             ShapeCollector shapeCollector = new ShapeCollector();
 
-            Shape circle = new Circle();
-            Shape square = new Square();
-            Shape triangle = new Triangle();
+            Shape circle = new Circle(3);
+            Shape square = new Square(3);
+            Shape triangle = new Triangle(3,2);
             shapeCollector.addFigure(circle);
             shapeCollector.addFigure(square);
             shapeCollector.addFigure(triangle);
@@ -127,14 +129,14 @@ public class ShapeCollectorTestSuite {
 
         }
 
-
+        @Test
         void testShowName() {
             //Given
             ShapeCollector shapeCollector = new ShapeCollector();
 
-            Shape circle = new Circle();
-            Shape square = new Square();
-            Shape triangle = new Triangle();
+            Shape circle = new Circle(3);
+            Shape square = new Square(3);
+            Shape triangle = new Triangle(3,2);
             shapeCollector.addFigure(circle);
             shapeCollector.addFigure(square);
             shapeCollector.addFigure(triangle);
@@ -151,14 +153,14 @@ public class ShapeCollectorTestSuite {
             Assertions.assertEquals(triangle.getShapeName(), getThirdFigure);
 
         }
-
+        @Test
         void testShowField() {
             //Given
             ShapeCollector shapeCollector = new ShapeCollector();
 
-            Shape circle = new Circle();
-            Shape square = new Square();
-            Shape triangle = new Triangle();
+            Shape circle = new Circle(3);
+            Shape square = new Square(3);
+            Shape triangle = new Triangle(3,2);
             shapeCollector.addFigure(circle);
             shapeCollector.addFigure(square);
             shapeCollector.addFigure(triangle);
@@ -170,9 +172,9 @@ public class ShapeCollectorTestSuite {
 
 
             //Then
-            Assertions.assertEquals(circle.getField(), getFirstFigure);
-            Assertions.assertEquals(square.getField(), getSecondFigure);
-            Assertions.assertEquals(triangle.getField(), getThirdFigure);
+            Assertions.assertEquals("Circle", getFirstFigure);
+            Assertions.assertEquals("Square", getSecondFigure);
+            Assertions.assertEquals("Triangle", getThirdFigure);
 
 
         }
