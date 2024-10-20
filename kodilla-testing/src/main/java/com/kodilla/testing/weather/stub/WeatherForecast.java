@@ -28,14 +28,14 @@ public class WeatherForecast {
 
     public Double avarageTemperature() {
         Double avarageTemp= 0.0;
-
+        int quantityOfMesure = temperatures.getTemperatures().size();
         for (Map.Entry<String, Double> temperature :
                 temperatures.getTemperatures().entrySet()) {
 
             avarageTemp = avarageTemp + temperature.getValue();
 
         }
-        return avarageTemp/5;
+        return avarageTemp/quantityOfMesure;
 
     }
 
