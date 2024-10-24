@@ -24,9 +24,5 @@ public class BookLibrary {
 
         return libraryDatabase.listBooksInHandsOf(libraryUser);
 
-
-
-
     }
-
 }
