@@ -8,41 +8,52 @@ import java.util.*;
 
 public class ShowStats {
 
-    Statistics statistics;
+    private int numberOfUsers;
+    private int numberOfPosts;
+    private int numberOfComments;
+    private double avaragePostsForUser;
+    private double avarageCommentsForUser;
+    private double avarageCommentsForPost;
 
-    public ShowStats(Statistics statistics) {
-        this.statistics = statistics;
+    public int getNumberOfUsers() {
+        return numberOfUsers;
     }
 
-
-    public List<String> usersNames() {
-
-        return statistics.usersNames();
+    public int getNumberOfPosts() {
+        return numberOfPosts;
     }
 
-    public int postsCount(ForumUser user) {
-
-        return statistics.postsCount(user);
+    public int getNumberOfComments() {
+        return numberOfComments;
     }
 
-    public int commentsCount(ForumUser user) {
-
-        return statistics.postsCount(user);
+    public double getAvaragePostsForUser() {
+        return avaragePostsForUser;
     }
 
+    public double getAvarageCommentsForUser() {
+        return avarageCommentsForUser;
+    }
+
+    public double getAvarageCommentsForPost() {
+        return avarageCommentsForPost;
+    }
 
     public void calculateAdvStatistics(Statistics statistics) {
-        List<String> listOfUsers = statistics.usersNames();
-        System.out.println("Liczba użytkowników " + listOfUsers.size());
+        numberOfUsers = statistics.usersNames().size();
+        numberOfPosts = statistics.postsCount();
+        numberOfComments = statistics.commentsCount();
 
-        int postsCount = 0;
-        List<String> listUsers = statistics.usersNames();
-        for (int i = 0; i < listOfUsers.size(); i++) {
-            String name = listOfUsers.get(i);
-            /*
-            name.getPostsQuantity();
-            */
+        if (numberOfUsers != 0){
+            avaragePostsForUser = (double) numberOfPosts / (double) numberOfUsers;
+            avarageCommentsForUser = (double) numberOfComments / (double) numberOfUsers;
         }
+
+        if (numberOfPosts != 0){
+            avarageCommentsForPost = (double) numberOfComments / (double) numberOfPosts;
+        }
+
+
     }
 
 

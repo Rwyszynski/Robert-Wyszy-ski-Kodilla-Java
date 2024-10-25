@@ -20,119 +20,148 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class ShowStatsTestSuite {
 
+    @Mock
+    private Statistics statistics;
+
     @BeforeEach
     public void beforeEveryTest() {
-
         System.out.println("Preparing to execute test");
-    }
-
-    @Mock
-    private Statistics StatisticsMock;
-
-
-    private List<ForumPost> generateListOfNForumPosts(int postsQuantity) {
-        List<ForumPost> resultList = new ArrayList<>();
-        for (int n = 1; n <= postsQuantity; n++) {
-            ForumPost forumPost = new ForumPost("Title " + n, "Author " + n);
-            resultList.add(forumPost);
-        }
-        return resultList;
-    }
-
-    private List<ForumUser> generateListOfNForumUser(int userQuantity) {
-        List<ForumUser> resultList = new ArrayList<>();
-        for (int n = 1; n <= userQuantity; n++) {
-            ForumUser forumUser = new ForumUser("Name" + n, "realName " + n);
-            resultList.add(forumUser);
-        }
-        return resultList;
-    }
-
-    private List<ForumComment> generateListOfNForumComment(int commentQuantity) {
-        List<ForumComment> resultList = new ArrayList<>();
-        for (int n = 1; n <= commentQuantity; n++) {
-            ForumComment forumComment = new ForumComment(new ForumPost("Title " +n, "Author" + n), "commentBody " + n, "author " + n);
-            resultList.add(forumComment);
-        }
-        return resultList;
     }
 
     @Test
     void testForumPostWithNoPosts() {
         //Given
-        ShowStats showStats = new ShowStats(StatisticsMock);
-        List<ForumPost> resultForum0Posts = generateListOfNForumPosts(0);
-        ForumUser forumUser = new ForumUser("Name", "realName");
-        when(StatisticsMock.postsCount(forumUser)).thenReturn(resultForum0Posts.size());
+        ShowStats showStats = new ShowStats();
+        when(statistics.postsCount()).thenReturn(0);
 
         //When
-        int forum0Posts = showStats.postsCount(forumUser);
+        showStats.calculateAdvStatistics(statistics);
 
         //Then
-        assertEquals(0, forum0Posts);
+        assertEquals(0, showStats.getNumberOfUsers());
+        assertEquals(0, showStats.getNumberOfPosts());
+        assertEquals(0, showStats.getNumberOfComments());
+        assertEquals(0, showStats.getAvaragePostsForUser());
+        assertEquals(0, showStats.getAvarageCommentsForUser());
+        assertEquals(0, showStats.getAvarageCommentsForPost());
     }
 
     @Test
     void testForumPostWith1000Posts() {
         //Given
-        ShowStats showStats = new ShowStats(StatisticsMock);
-        List<ForumUser> resultForum1000Posts = generateListOfNForumUser(1000);
-        ForumUser forumUser = new ForumUser("Name", "realName");
-        when(StatisticsMock.postsCount(forumUser)).thenReturn(resultForum1000Posts.size());
+        ShowStats showStats = new ShowStats();
+        when(statistics.postsCount()).thenReturn(1000);
 
         //When
-        int forum0Posts = showStats.postsCount(forumUser);
+        showStats.calculateAdvStatistics(statistics);
 
         //Then
-        assertEquals(1000, forum0Posts);
+        assertEquals(0, showStats.getNumberOfUsers());
+        assertEquals(1000, showStats.getNumberOfPosts());
+        assertEquals(0, showStats.getNumberOfComments());
+        assertEquals(0, showStats.getAvaragePostsForUser());
+        assertEquals(0, showStats.getAvarageCommentsForUser());
+        assertEquals(0, showStats.getAvarageCommentsForPost());
     }
 
     @Test
     void testForumCommentWith0Comments() {
         //Given
-        ShowStats showStats = new ShowStats(StatisticsMock);
-        List<ForumComment> resultForum0Comments = generateListOfNForumComment(0);
-        ForumUser forumUser = new ForumUser("Name", "realName");
-        when(showStats.commentsCount(forumUser)).thenReturn(resultForum0Comments.size());
+        ShowStats showStats = new ShowStats();
+        when(statistics.commentsCount()).thenReturn(0);
 
         //When
-        int forum0Comments = showStats.commentsCount(forumUser);
+        showStats.calculateAdvStatistics(statistics);
 
         //Then
-        assertEquals(0, forum0Comments);
+        assertEquals(0, showStats.getNumberOfUsers());
+        assertEquals(0, showStats.getNumberOfPosts());
+        assertEquals(0, showStats.getNumberOfComments());
+        assertEquals(0, showStats.getAvaragePostsForUser());
+        assertEquals(0, showStats.getAvarageCommentsForUser());
+        assertEquals(0, showStats.getAvarageCommentsForPost());
     }
+
 
     @Test
     void testForumUserWith0User() {
         //Given
-        ShowStats showStats = new ShowStats(StatisticsMock);
-        List<ForumUser> resultForum0Users = generateListOfNForumUser(0);
-        ForumUser forumUser = new ForumUser("Name", "realName");
-        when(showStats.commentsCount(forumUser)).thenReturn(resultForum0Users.size());
+        ShowStats showStats = new ShowStats();
+        List<String> users = new ArrayList<>();
+        when(statistics.usersNames()).thenReturn(users);
 
         //When
-        int forum0Users = showStats.commentsCount(forumUser);
+        showStats.calculateAdvStatistics(statistics);
 
         //Then
-        assertEquals(0, forum0Users);
+        assertEquals(0, showStats.getNumberOfUsers());
+        assertEquals(0, showStats.getNumberOfPosts());
+        assertEquals(0, showStats.getNumberOfComments());
+        assertEquals(0, showStats.getAvaragePostsForUser());
+        assertEquals(0, showStats.getAvarageCommentsForUser());
+        assertEquals(0, showStats.getAvarageCommentsForPost());
     }
+
 
     @Test
     void testForumUserWith100User() {
         //Given
-        ShowStats showStats = new ShowStats(StatisticsMock);
-        List<ForumUser> resultForum100Users = generateListOfNForumUser(100);
-        ForumUser forumUser = new ForumUser("Name", "realName");
-        when(showStats.commentsCount(forumUser)).thenReturn(resultForum100Users.size());
+        ShowStats showStats = new ShowStats();
+        List<String> users = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            users.add("user" + i);
+        }
+        when(statistics.usersNames()).thenReturn(users);
 
         //When
-        int forum100Users = showStats.commentsCount(forumUser);
+        showStats.calculateAdvStatistics(statistics);
 
         //Then
-        assertEquals(100, forum100Users);
+        assertEquals(100, showStats.getNumberOfUsers());
+        assertEquals(0, showStats.getNumberOfPosts());
+        assertEquals(0, showStats.getNumberOfComments());
+        assertEquals(0, showStats.getAvaragePostsForUser());
+        assertEquals(0, showStats.getAvarageCommentsForUser());
+        assertEquals(0.0, showStats.getAvarageCommentsForPost());
+
     }
 
+    @Test
+    void testForumPostsGratherThanComments() {
+        //Given
+        ShowStats showStats = new ShowStats();
+        when(statistics.postsCount()).thenReturn(100);
+        when(statistics.commentsCount()).thenReturn(50);
 
+        //When
+        showStats.calculateAdvStatistics(statistics);
 
+        //Then
+        assertEquals(0, showStats.getNumberOfUsers());
+        assertEquals(100, showStats.getNumberOfPosts());
+        assertEquals(50, showStats.getNumberOfComments());
+        assertEquals(0, showStats.getAvaragePostsForUser());
+        assertEquals(0, showStats.getAvarageCommentsForUser());
+        assertEquals(0.5, showStats.getAvarageCommentsForPost());
+    }
+
+    @Test
+    void testForumCommentsGratherThanPosts() {
+        //Given
+        ShowStats showStats = new ShowStats();
+        when(statistics.postsCount()).thenReturn(50);
+        when(statistics.commentsCount()).thenReturn(100);
+
+        //When
+        showStats.calculateAdvStatistics(statistics);
+
+        //Then
+        assertEquals(0, showStats.getNumberOfUsers());
+        assertEquals(50, showStats.getNumberOfPosts());
+        assertEquals(100, showStats.getNumberOfComments());
+        assertEquals(0, showStats.getAvaragePostsForUser());
+        assertEquals(0, showStats.getAvarageCommentsForUser());
+        assertEquals(2, showStats.getAvarageCommentsForPost());
+    }
 }
 

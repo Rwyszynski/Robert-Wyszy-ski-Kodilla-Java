@@ -1,24 +1,18 @@
 package com.kodilla.stream;
 
-import com.kodilla.stream.iterate.NumbersGenerator;
-import com.kodilla.stream.lambda.ExecuteSaySomething;
-import com.kodilla.stream.lambda.Processor;
-import com.kodilla.stream.beautifier.*;
+import com.kodilla.stream.book.Book;
+import com.kodilla.stream.book.BookDirectory;
+import java.util.stream.Collectors;
+
 public class StreamMain {
 
     public static void main(String[] args) {
-        Processor processor = new Processor();
-        ExecuteSaySomething executeSaySomething = new ExecuteSaySomething();
-        processor.execute(executeSaySomething);
+        BookDirectory theBookDirectory = new BookDirectory();
+        String theResultStringOfBooks = theBookDirectory.getList().stream()  // [1]
+                .filter(book -> book.getYearOfPublication() > 2005)
+                .map(Book::toString)
+                .collect(Collectors.joining(",\n","<<",">>"));                    // [2]
 
-        PoemBeautifier poemBeautifier = new PoemBeautifier();
-        poemBeautifier.beautify("That is a text to change.", (toBeautify) -> toBeautify.toUpperCase() );
-        poemBeautifier.beautify("That is a text to change.", (toBeautify) -> toBeautify + "ABC" );
-        poemBeautifier.beautify("That is a text to change.", (toBeautify) ->  "ABC " + toBeautify);
-
-        System.out.println("Using Stream to generate even numbers from 1 to 20");
-        NumbersGenerator.generateEven(20);
-
-
+        System.out.println(theResultStringOfBooks);
     }
 }
