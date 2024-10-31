@@ -3,7 +3,7 @@ import java.math.BigDecimal;
 
 public final class Country{
 
-    BigDecimal peopleQuantity;
+    private BigDecimal peopleQuantity;
 
     public Country(BigDecimal peopleQuantity) {
         this.peopleQuantity = peopleQuantity;
