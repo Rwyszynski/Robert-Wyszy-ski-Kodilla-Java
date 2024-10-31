@@ -6,13 +6,13 @@ import java.util.List;
 
 public final class World {
 
-    private List<Continent> continents = new ArrayList<>();
+    private final List<Continent> continents = new ArrayList<>();
 
     public BigDecimal getPeopleQuantity(World world) {
-        return  (BigDecimal) continents.stream()
+        return   continents.stream()
                 .flatMap(continent -> continent.getCountries().stream())
                 .map(Country::getPeopleQuantity)
-                .reduce(BigDecimal.ZERO, (sum, current) -> sum = sum.add(current));
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     public void addContinents(Continent continent){
