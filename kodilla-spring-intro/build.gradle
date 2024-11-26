@@ -5,22 +5,16 @@ plugins {
 group = 'com.kodilla'
 version = '0.0.1-SNAPSHOT'
 
-java {
-        sourceCompatibility = '21';
-
-}
-
 repositories {
     mavenCentral()
-
 }
 
 dependencies {
-    testImplementation 'org.mockito:mockito-junit-jupiter:5.14.2'
     testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.14.2'
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
-tasks.named('test') {
+test {
     useJUnitPlatform()
 }
