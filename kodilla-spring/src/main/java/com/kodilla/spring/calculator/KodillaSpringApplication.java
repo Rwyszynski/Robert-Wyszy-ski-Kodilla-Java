@@ -1,4 +1,4 @@
-package com.kodilla.spring.forum;
+package com.kodilla.spring.calculator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
