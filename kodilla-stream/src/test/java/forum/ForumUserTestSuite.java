@@ -1,5 +1,6 @@
-package com.kodilla.stream.forum;
+package forum;
 
+import com.kodilla.stream.forum.ForumUser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
