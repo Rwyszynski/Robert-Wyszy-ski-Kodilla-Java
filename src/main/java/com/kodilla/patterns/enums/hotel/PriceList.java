@@ -1,7 +1,5 @@
 package  com.kodilla.patterns.enums.hotel;
 
-import com.kodilla.patterns.enums.hotel.Season;
-
 import java.math.BigDecimal;
 import java.util.Map;
 
